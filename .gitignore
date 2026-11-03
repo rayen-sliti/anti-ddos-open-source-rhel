@@ -1,0 +1,7 @@
+.env
+*.key
+id_*
+*.pem
+*.xml
+*.db
+*.db.gz

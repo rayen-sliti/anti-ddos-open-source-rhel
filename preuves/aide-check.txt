@@ -1,0 +1,54 @@
+Start timestamp: 2026-10-11 15:52:02 +0100 (AIDE 0.19.2)
+AIDE found differences between database and filesystem!!
+
+Summary:
+  Total number of entries:	191857
+  Added entries:		1
+  Removed entries:		0
+  Changed entries:		1
+
+---------------------------------------------------
+Added entries:
+---------------------------------------------------
+
+f+++++++++++++++++: /etc/cron.d/aide-check
+
+---------------------------------------------------
+Changed entries:
+---------------------------------------------------
+
+d > ...   .. .... : /etc/cron.d
+
+---------------------------------------------------
+Detailed information about changes:
+---------------------------------------------------
+
+Directory: /etc/cron.d
+ Size      : 21                               | 39
+
+
+---------------------------------------------------
+The attributes of the (uncompressed) database(s):
+---------------------------------------------------
+
+/var/lib/aide/aide.db.gz
+ SHA256    : pLjvqknTgn/TMhlVuEnvM51M0Qz7dMsb
+             mRRjayuP6CM=
+ SHA512    : AY//x0oKIrDQ47l3xXK306XQuIo6kB+f
+             TtXsDHGaSXPg0ZRgMapd6McKx9W3hntv
+             oizCqmylcQSnDn4dYskpZw==
+ STRIBOG256: +6lM6aAyV2HK43soLztuuNStC2zagERt
+             hm3t7NlGog4=
+ STRIBOG512: DWeSAFoxszEIrl2OoC/cpTfEz56MOECR
+             REwx5NYmfv3Bj9dD8p8Ig+MCzEcEI1qg
+             TDkh7KkCJOe2Et/oHNuJWw==
+ SHA512/256: IaSLJvRy7nD6v1N39x8X33petOyqr8Gx
+             aHdh5GBYp14=
+ SHA3-256  : ebr1wRqt+yUfq85AVRP2Zlt3QeFjJW3g
+             fcrztxzLKBw=
+ SHA3-512  : TyolKG5PE1dM6nxacnGz8/gGnLGz5ihl
+             reR/rLG95nOTGVbHCgh5ApXvXKguz0FQ
+             CB0+ChLQtmFpDzFlFjiE8g==
+
+
+End timestamp: 2026-10-11 15:58:19 +0100 (run time: 6m 17s)

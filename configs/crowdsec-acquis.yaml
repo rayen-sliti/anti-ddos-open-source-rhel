@@ -1,0 +1,5 @@
+filenames:
+  - /var/log/nginx/anti-ddos-access.log
+  - /var/log/nginx/anti-ddos-error.log
+labels:
+  type: nginx

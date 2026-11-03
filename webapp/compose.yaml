@@ -1,0 +1,11 @@
+services:
+  webapp:
+    image: nginx:alpine
+    container_name: webapp
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - ./html:/usr/share/nginx/html:ro,z
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped

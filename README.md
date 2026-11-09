@@ -1,4 +1,4 @@
-﻿# Open-source Anti-DDoS architecture on Red Hat Enterprise Linux
+# Open-source Anti-DDoS architecture on Red Hat Enterprise Linux
 
 Prevention, detection and automatic blocking of application-layer abuse (HTTP floods, scans) using **Nginx, Docker, CrowdSec, nftables, Prometheus/Grafana, AIDE and OpenSCAP**, documented with an **ISO/IEC 27001:2022** audit approach.
 
@@ -19,13 +19,25 @@ Prevention, detection and automatic blocking of application-layer abuse (HTTP fl
 
 | Test | Result |
 |---|---|
-| 100 parallel requests from the client | 22 x `200` and 78 x `429` (second run: 23 / 77) |
+| 100 parallel requests from the client | 22 × `200` and 78 × `429` (second run: 23 / 77) |
 | Backend exposure | Port 8080 unreachable from the client (timeout); listens on `127.0.0.1` |
 | Detection and blocking | CrowdSec alert `nginx-req-limit-exceeded`, ban decision; client gets `200` at 17:09:17 then timeouts from 17:09:22 |
-| OpenSCAP (CIS L1 Server) | 157 -> 167 passed rules, 118 -> 108 failed, 20 not applicable |
+| OpenSCAP (CIS L1 Server) | 157 → 167 passed rules, 118 → 108 failed, 20 not applicable |
 | AIDE | Baseline of 191,856 entries |
 
 Ban duration was reduced from 4 h to 2 min for the lab demo.
+
+### Screenshots
+
+![Rate limiting: 22 x 200 and 78 x 429](docs/img/01-rate-limiting.png)
+![CrowdSec alert and ban decision](docs/img/02-crowdsec-alert.png)
+![Blocking timeline: 200 then timeouts](docs/img/03-blocking-timeline.png)
+![Grafana dashboard](docs/img/04-grafana.png)
+
+## Documentation
+
+- [Project report (PDF, French)](docs/rapport-anti-ddos.pdf)
+- [Defense slides (PDF, French)](docs/presentation-anti-ddos.pdf)
 
 ## Repository structure
 
@@ -46,7 +58,7 @@ preuves/     Text outputs of the tests and scans
 5. Docker (official repository) and `docker compose up -d` in `webapp/`.
 6. Nginx: copy `configs/anti-ddos.conf` to `/etc/nginx/conf.d/`, disable the default `server` block in `nginx.conf`, then `setsebool -P httpd_can_network_connect 1`.
 7. CrowdSec: install the engine, move the local API to port 8081 (8080 is used by the app), install `crowdsecurity/nginx`, declare the Nginx log files in `acquis.d`, enable the `dateparse-enrich` parser, install `crowdsec-firewall-bouncer-nftables`.
-8. Monitoring: copy `monitoring/.env.example` to `monitoring/.env`, set `GF_PASSWORD` (never commit it) and run `docker compose up -d`.
+8. Monitoring: create `monitoring/.env` with `GF_PASSWORD=<your password>` (never commit it) and run `docker compose up -d`.
 9. AIDE (`aide --init`) and OpenSCAP (`oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis_server_l1 ...`).
 
 ## ISO/IEC 27001:2022 mapping
@@ -73,6 +85,10 @@ preuves/     Text outputs of the tests and scans
 - With SELinux Enforcing, Nginx needs `httpd_can_network_connect` to reach the container.
 - CrowdSec read the logs but parsed nothing until `dateparse-enrich` was enabled; `cscli explain` made the problem visible.
 - A hardening file in `sshd_config.d/` must sort before defaults (`00-`), and a contradicting default file must be removed.
+
+## License
+
+MIT, see [LICENSE](LICENSE).
 
 ## Author
 
